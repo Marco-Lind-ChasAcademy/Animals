@@ -56,7 +56,7 @@ int main()
 
     printf("%u", alfons); */
 
-    //getchar();
+    getchar();
     
 
     return 0;

@@ -24,9 +24,9 @@ int initAnimal(Animal **animal, char *name, int weight, int height, char *sound,
     }
 
     // Allocate memory for strings
-    (*animal)->name = malloc(len1 + 1);
-    (*animal)->sound = malloc(len2 + 1);
-    (*animal)->species = malloc(len3 + 1);
+    allocStr(&(*animal)->name, len1);
+    allocStr(&(*animal)->sound, len2);
+    allocStr(&(*animal)->species, len3);
 
     // Clean up on failure
     if ((*animal)->name == NULL ||
@@ -108,17 +108,14 @@ int randNum(int min, int max)
     return (rand() % (max - min + 1)) + min;
 }
 
-int allocStr(char **dest, char *src)
+int allocStr(char **dest, size_t len)
 {
-    *dest = malloc(strlen(src) + 1);
+    *dest = malloc(len + 1);
     if (*dest == NULL)
     {
         puts("ALLOCATION FAILED");
         return 0;
     }
-
-    strcpy(*dest, src);
-
     return 1;
 }
 

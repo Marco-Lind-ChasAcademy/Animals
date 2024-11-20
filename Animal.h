@@ -29,7 +29,7 @@ int animalJump(Animal *animal);
 int dashAnimal(Animal *animal);
 int animalBiteAnimal(Animal *attacker, Animal *victim);
 int randNum(int min, int max);
-int allocStr(char **dest, char *src);
+int allocStr(char **dest, size_t len);
 void copyString(char *dest, const char *src);
 
 
