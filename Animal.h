@@ -18,16 +18,16 @@ typedef struct
     unsigned int speed;
     char *species;
     unsigned int strength;
-    unsigned int hp;
+    int hp;
 
 } Animal;
 
-Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, unsigned int hp);
-void deInitAnimal(Animal **animal);
+Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, int hp);
+void deinitAnimal(Animal **animal);
 void displayAnimalInfo(Animal *animal);
 unsigned int animalJump(Animal *animal);
 unsigned int dashAnimal(Animal *animal);
-unsigned int animalBite(Animal *attacker, Animal *victim);
+unsigned int animalBiteAnimal(Animal *attacker, Animal *victim);
 unsigned int randNum(unsigned int min, unsigned int max);
 char **allocStr(char **dest, char *src);
 

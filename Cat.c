@@ -30,9 +30,9 @@ Cat *initCat(char *name)
     return cat;
 }
 
-void deInitCat(Cat **cat)
+void deinitCat(Cat **cat)
 {
-    deInitAnimal(&(*cat)->base);
+    deinitAnimal(&(*cat)->base);
     free(*cat);
     *cat = NULL;
 }
@@ -44,18 +44,19 @@ void displayCatInfo(Cat *cat)
     puts("");
 }
 
-unsigned int catCrazyClawSlash(Cat *attacker, Animal *victim)
+unsigned int catSlashAnimal(Cat *attacker, Animal *victim)
 {
     unsigned int damage = 0;
-    unsigned int max = attacker->base->strength * attacker->claw_length;
-    damage = randNum(attacker->base->strength * 10, max);
+    unsigned int max = attacker->base->strength * attacker->claw_length * 10;
+    damage = randNum(attacker->base->strength, max);
     victim->hp -= damage;
 
-    printf("%s slashes like crazy, hitting %s\n\n", attacker->base->name, victim->name);
+    printf("%s slashed like crazy, hitting %s! -%uHP\n\n", attacker->base->name, victim->name, damage);
 
-    if (victim->hp == 0)
+    if (victim->hp <= 0)
     {
         printf("%s fainted...\n\n", victim->name);
+        victim->hp = 0;
     }
     
 

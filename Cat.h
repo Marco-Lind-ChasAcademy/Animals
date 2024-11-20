@@ -11,9 +11,9 @@ typedef struct
 } Cat;
 
 Cat *initCat(char *name);
-void deInitCat(Cat **cat);
+void deinitCat(Cat **cat);
 void displayCatInfo(Cat *cat);
-unsigned int catCrazyClawSlash(Cat *attacker, Animal *victim);
+unsigned int catSlashAnimal(Cat *attacker, Animal *victim);
 
 
 #endif

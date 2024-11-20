@@ -31,17 +31,28 @@ int main()
 
     animalJump(sid->base); */
 
-    Cat *alfons = initCat("Alfons");
-    displayCatInfo(alfons);
+    /* Cat *alfons = initCat("Alfons");
+    displayCatInfo(alfons); */
+
     Cat *kalle = initCat("Kalle");
     displayCatInfo(kalle);
+
     Cat *oscar = initCat("Oscar");
     displayCatInfo(oscar);
-    deInitCat(&oscar);
-    deInitCat(&kalle);
-    deInitCat(&alfons);
 
-    printf("%u", alfons);
+    animalBiteAnimal(oscar->base, kalle->base);
+
+    displayCatInfo(kalle);
+
+    catSlashAnimal(oscar, kalle->base);
+
+    displayCatInfo(kalle);
+
+    deinitCat(&oscar);
+    deinitCat(&kalle);
+    /* deinitCat(&alfons);
+
+    printf("%u", alfons); */
 
     //getchar();
     

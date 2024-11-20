@@ -1,7 +1,7 @@
 #include "Animal.h"
 
 // name[20], sound[10], species[20]
-Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, unsigned int hp)
+Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, int hp)
 {
     // Validate string lengths
     if (strlen(name) > 20 || strlen(sound) > 10 || strlen(species) > 20)
@@ -23,7 +23,7 @@ Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *s
         allocStr(&animal->sound, sound) == NULL ||
         allocStr(&animal->species, species) == NULL)
     {
-        deInitAnimal(&animal); // Clean up on failure
+        deinitAnimal(&animal); // Clean up on failure
         return NULL;
     }
 
@@ -37,7 +37,7 @@ Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *s
     return animal;
 }
 
-void deInitAnimal(Animal **animal)
+void deinitAnimal(Animal **animal)
 {
         free((*animal)->name);
         free((*animal)->sound);
@@ -54,7 +54,7 @@ void displayAnimalInfo(Animal *animal)
     printf("%s sound: %s\n", animal->species, animal->sound);
     printf("%s speed: %u km/h\n", animal->species, animal->speed);
     printf("%s strength: %u\n", animal->species, animal->strength);
-    printf("%s HP: %u\n", animal->species, animal->hp);
+    printf("%s HP: %d\n", animal->species, animal->hp);
 }
 
 unsigned int animalJump(Animal *animal)
@@ -74,16 +74,17 @@ unsigned int dashAnimal(Animal *animal)
     return distance;
 }
 
-unsigned int animalBite(Animal *attacker, Animal *victim)
+unsigned int animalBiteAnimal(Animal *attacker, Animal *victim)
 {
     unsigned int damage = randNum(0, attacker->strength);
     victim->hp = (victim->hp > damage) ? (victim->hp - damage) : 0;
 
     printf("%s bit %s! -%u HP\n\n", attacker->name, victim->name, damage);
 
-    if (victim->hp == 0)
+    if (victim->hp <= 0)
     {
         printf("%s fainted...\n\n", victim->name);
+        victim->hp = 0;
     }
 
     return damage;

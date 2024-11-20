@@ -1,20 +1,19 @@
 #ifndef DOG_H
 #define DOG_H
 
-#define DOG_SPEED 100
-
 #include "Animal.h"
 
 typedef struct
 {
-    Animal _base;
     Animal *base;
     unsigned int tooth_length;
 
 } Dog;
 
-void initDog(Dog *destination, char *name);
+Dog *initDog(char *name);
+void deinitDog(Dog **dog);
 void displayDogInfo(Dog *dog);
+unsigned int dogCrazyClawSlash(Dog *attacker, Animal *victim);
 
 
 #endif
