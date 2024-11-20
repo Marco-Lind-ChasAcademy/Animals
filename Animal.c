@@ -1,40 +1,53 @@
 #include "Animal.h"
 
 // name[20], sound[10], species[20]
-Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, int hp)
+int initAnimal(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp)
 {
+    size_t len1 = strlen(name);
+    size_t len2 = strlen(name);
+    size_t len3 = strlen(name);
+
     // Validate string lengths
-    if (strlen(name) > 20 || strlen(sound) > 10 || strlen(species) > 20)
+    if (len1 > 20 || 
+        len2 > 10 || 
+        len3 > 20)
     {
         puts("STRINGS TOO LONG");
-        return NULL;
+        return 0;
     }
 
-    Animal *animal = malloc(sizeof(Animal));
-    if (animal == NULL)
+    *animal = malloc(sizeof(Animal));
+    if (*animal == NULL)
     {
-        puts("ALLOCATION FAILED");
-        return NULL;
+        puts("ANIMAL ALLOCATION FAILED");
+        return 0;
     }
-    
 
     // Allocate memory for strings
-    if (allocStr(&animal->name, name) == NULL ||
-        allocStr(&animal->sound, sound) == NULL ||
-        allocStr(&animal->species, species) == NULL)
+    (*animal)->name = malloc(len1 + 1);
+    (*animal)->sound = malloc(len2 + 1);
+    (*animal)->species = malloc(len3 + 1);
+
+    // Clean up on failure
+    if ((*animal)->name == NULL ||
+        (*animal)->sound == NULL ||
+        (*animal)->species == NULL)
     {
-        deinitAnimal(&animal); // Clean up on failure
-        return NULL;
+        deinitAnimal(&(*animal)); 
+        return 0;
     }
 
-    // Initialize other fields
-    animal->weight = weight;
-    animal->height = height;
-    animal->speed = speed;
-    animal->strength = strength;
-    animal->hp = hp;
+    // Initialize fields
+    copyString((*animal)->name, name);
+    copyString((*animal)->sound, sound);
+    copyString((*animal)->species, species);
+    (*animal)->weight = weight;
+    (*animal)->height = height;
+    (*animal)->speed = speed;
+    (*animal)->strength = strength;
+    (*animal)->hp = hp;
 
-    return animal;
+    return 1;
 }
 
 void deinitAnimal(Animal **animal)
@@ -57,26 +70,26 @@ void displayAnimalInfo(Animal *animal)
     printf("%s HP: %d\n", animal->species, animal->hp);
 }
 
-unsigned int animalJump(Animal *animal)
+int animalJump(Animal *animal)
 {
-    unsigned int height = randNum(0, animal->speed * 3);
+    int height = randNum(0, animal->speed * 3);
     printf("%s jumps %u cm high!\n\n", animal->name, height);
 
     return height;
 }
 
-unsigned int dashAnimal(Animal *animal)
+int dashAnimal(Animal *animal)
 {
-    unsigned int distance = randNum(0, animal->speed);
+    int distance = randNum(0, animal->speed);
     printf("%s dashed %u m!\n", animal->name, distance);
     puts("");
 
     return distance;
 }
 
-unsigned int animalBiteAnimal(Animal *attacker, Animal *victim)
+int animalBiteAnimal(Animal *attacker, Animal *victim)
 {
-    unsigned int damage = randNum(0, attacker->strength);
+    int damage = randNum(0, attacker->strength);
     victim->hp = (victim->hp > damage) ? (victim->hp - damage) : 0;
 
     printf("%s bit %s! -%u HP\n\n", attacker->name, victim->name, damage);
@@ -90,12 +103,12 @@ unsigned int animalBiteAnimal(Animal *attacker, Animal *victim)
     return damage;
 }
 
-unsigned int randNum(unsigned int min, unsigned int max)
+int randNum(int min, int max)
 {
     return (rand() % (max - min + 1)) + min;
 }
 
-char **allocStr(char **dest, char *src)
+int allocStr(char **dest, char *src)
 {
     *dest = malloc(strlen(src) + 1);
     if (*dest == NULL)
@@ -106,5 +119,15 @@ char **allocStr(char **dest, char *src)
 
     strcpy(*dest, src);
 
-    return dest;
+    return 1;
+}
+
+void copyString(char *dest, const char *src)
+{
+    int i = 0;
+    for (; src[i] != '\0'; i++)
+    {
+        dest[i] = src[i];
+    }
+    dest[i] = '\0';
 }

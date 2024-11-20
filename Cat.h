@@ -10,7 +10,7 @@ typedef struct
 
 } Cat;
 
-Cat *initCat(char *name);
+int initCat(Cat **cat, char *name);
 void deinitCat(Cat **cat);
 void displayCatInfo(Cat *cat);
 unsigned int catSlashAnimal(Cat *attacker, Animal *victim);

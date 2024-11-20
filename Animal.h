@@ -12,24 +12,25 @@
 typedef struct
 {
     char *name;
-    unsigned int weight;
-    unsigned int height;
+    int weight;
+    int height;
     char *sound;
-    unsigned int speed;
+    int speed;
     char *species;
-    unsigned int strength;
+    int strength;
     int hp;
 
 } Animal;
 
-Animal *initAnimal(char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, int hp);
+int initAnimal(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp);
 void deinitAnimal(Animal **animal);
 void displayAnimalInfo(Animal *animal);
-unsigned int animalJump(Animal *animal);
-unsigned int dashAnimal(Animal *animal);
-unsigned int animalBiteAnimal(Animal *attacker, Animal *victim);
-unsigned int randNum(unsigned int min, unsigned int max);
-char **allocStr(char **dest, char *src);
+int animalJump(Animal *animal);
+int dashAnimal(Animal *animal);
+int animalBiteAnimal(Animal *attacker, Animal *victim);
+int randNum(int min, int max);
+int allocStr(char **dest, char *src);
+void copyString(char *dest, const char *src);
 
 
 #endif

@@ -1,7 +1,14 @@
 #include "Cat.h"
 
-Cat *initCat(char *name)
+int initCat(Cat **cat, char *name)
 {
+    *cat = malloc(sizeof(Cat));
+    if (*cat == NULL)
+    {
+        puts("CAT ALLOCATION FAILED");
+        return 0;
+    }
+    
     char *sound = "Meow!";
     char *species = "Cat";
     unsigned int weight = randNum(1, 10);
@@ -11,23 +18,16 @@ Cat *initCat(char *name)
     unsigned int hp = randNum(5, 100);
     unsigned int claw_length = randNum(3, 10);
 
-    Cat *cat = malloc(sizeof(Cat));
-    if (cat == NULL)
+    if (!initAnimal(&(*cat)->base, name, weight, height, sound, speed, species, strength, hp))
     {
-        puts("ALLOCATION FAILED");
+        free(*cat);
+        *cat = NULL;
         return 0;
     }
     
-    cat->claw_length = claw_length;
+    (*cat)->claw_length = claw_length;
 
-    cat->base = initAnimal(name, weight, height, sound, speed, species, strength, hp);
-    if (cat->base == NULL)
-    {
-        free(cat);
-        return 0;
-    }
-
-    return cat;
+    return 1;
 }
 
 void deinitCat(Cat **cat)

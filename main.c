@@ -34,10 +34,12 @@ int main()
     /* Cat *alfons = initCat("Alfons");
     displayCatInfo(alfons); */
 
-    Cat *kalle = initCat("Kalle");
+    Cat *kalle;
+    initCat(&kalle, "Kalle");
     displayCatInfo(kalle);
 
-    Cat *oscar = initCat("Oscar");
+    Cat *oscar;
+    initCat(&oscar, "Oscar");
     displayCatInfo(oscar);
 
     animalBiteAnimal(oscar->base, kalle->base);
