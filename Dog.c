@@ -1,57 +1,57 @@
 #include "Dog.h"
 
-int initDog(Dog **dog, char *name)
+int dogInit(Dog **dog, char *name)
 {
-    *dog = malloc(sizeof(dog));
+    *dog = malloc(sizeof(Dog));
     if (*dog == NULL)
     {
-        puts("dog ALLOCATION FAILED");
+        puts("DOG ALLOCATION FAILED");
         return 0;
     }
     
-    char *sound = "Woof!";
+    char *sound = "Meow!";
     char *species = "Dog";
     unsigned int weight = randNum(1, 10);
     unsigned int height = randNum(10, 30);
     unsigned int speed = randNum(25, 50);
     unsigned int strength = randNum(1, 10);
     unsigned int hp = randNum(5, 100);
-    unsigned int claw_length = randNum(3, 10);
+    unsigned int tooth_length = randNum(3, 10);
 
-    if (!initAnimal(&(*dog)->base, name, weight, height, sound, speed, species, strength, hp))
+    if (!animalInit(&(*dog)->base, name, weight, height, sound, speed, species, strength, hp))
     {
         free(*dog);
         *dog = NULL;
         return 0;
     }
     
-    (*dog)->claw_length = claw_length;
+    (*dog)->tooth_length = tooth_length;
 
     return 1;
 }
 
-void deinitDog(Dog **dog)
+void dogDeinit(Dog **dog)
 {
-    deinitAnimal(&(*dog)->base);
+    animalDeinit(&(*dog)->base);
     free(*dog);
     *dog = NULL;
 }
 
-void displayDogInfo(Dog *dog)
+void dogDisplayInfo(Dog *dog)
 {
-    displayAnimalInfo(dog->base);
-    printf("%s claw length: %u mm\n", dog->base->species, dog->claw_length);
+    displayInfo(dog->base);
+    printf("%s claw length: %u mm\n", dog->base->species, dog->tooth_length);
     puts("");
 }
 
-unsigned int DogSlashAnimal(Dog *attacker, Animal *victim)
+unsigned int dogMaulAnimal(Dog *attacker, Animal *victim)
 {
     unsigned int damage = 0;
-    unsigned int max = attacker->base->strength * attacker->claw_length * 10;
+    unsigned int max = attacker->base->strength * attacker->tooth_length * 10;
     damage = randNum(attacker->base->strength, max);
     victim->hp -= damage;
 
-    printf("%s slashed like crazy, hitting %s! -%uHP\n\n", attacker->base->name, victim->name, damage);
+    printf("%s bit and shaked %s like crazy! -%uHP\n\n", attacker->base->name, victim->name, damage);
 
     if (victim->hp <= 0)
     {

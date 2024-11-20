@@ -1,6 +1,6 @@
 #include "Cat.h"
 
-int initCat(Cat **cat, char *name)
+int catInit(Cat **cat, char *name)
 {
     *cat = malloc(sizeof(Cat));
     if (*cat == NULL)
@@ -18,7 +18,7 @@ int initCat(Cat **cat, char *name)
     unsigned int hp = randNum(5, 100);
     unsigned int claw_length = randNum(3, 10);
 
-    if (!initAnimal(&(*cat)->base, name, weight, height, sound, speed, species, strength, hp))
+    if (!animalInit(&(*cat)->base, name, weight, height, sound, speed, species, strength, hp))
     {
         free(*cat);
         *cat = NULL;
@@ -30,16 +30,16 @@ int initCat(Cat **cat, char *name)
     return 1;
 }
 
-void deinitCat(Cat **cat)
+void catDeinit(Cat **cat)
 {
-    deinitAnimal(&(*cat)->base);
+    animalDeinit(&(*cat)->base);
     free(*cat);
     *cat = NULL;
 }
 
-void displayCatInfo(Cat *cat)
+void catDisplayInfo(Cat *cat)
 {
-    displayAnimalInfo(cat->base);
+    displayInfo(cat->base);
     printf("%s claw length: %u mm\n", cat->base->species, cat->claw_length);
     puts("");
 }

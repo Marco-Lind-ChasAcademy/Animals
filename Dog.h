@@ -6,14 +6,14 @@
 typedef struct
 {
     Animal *base;
-    unsigned int claw_length;
+    unsigned int tooth_length;
 
 } Dog;
 
-int initDog(Dog **dog, char *name);
-void deinitDog(Dog **dog);
-void displayDogInfo(Dog *dog);
-unsigned int DogSlashAnimal(Dog *attacker, Animal *victim);
+int dogInit(Dog **dog, char *name);
+void dogDeinit(Dog **dog);
+void dogDisplayInfo(Dog *dog);
+unsigned int dogMaulAnimal(Dog *attacker, Animal *victim);
 
 
 #endif

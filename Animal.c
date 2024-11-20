@@ -1,7 +1,7 @@
 #include "Animal.h"
 
 // name[20], sound[10], species[20]
-int initAnimal(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp)
+int animalInit(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp)
 {
     size_t len1 = strlen(name);
     size_t len2 = strlen(name);
@@ -16,6 +16,7 @@ int initAnimal(Animal **animal, char *name, int weight, int height, char *sound,
         return 0;
     }
 
+    // Allocate memory for animal
     *animal = malloc(sizeof(Animal));
     if (*animal == NULL)
     {
@@ -33,14 +34,14 @@ int initAnimal(Animal **animal, char *name, int weight, int height, char *sound,
         (*animal)->sound == NULL ||
         (*animal)->species == NULL)
     {
-        deinitAnimal(&(*animal)); 
+        animalDeinit(&(*animal)); 
         return 0;
     }
 
     // Initialize fields
-    copyString((*animal)->name, name);
-    copyString((*animal)->sound, sound);
-    copyString((*animal)->species, species);
+    strcpy((*animal)->name, name);
+    strcpy((*animal)->sound, sound);
+    strcpy((*animal)->species, species);
     (*animal)->weight = weight;
     (*animal)->height = height;
     (*animal)->speed = speed;
@@ -50,7 +51,7 @@ int initAnimal(Animal **animal, char *name, int weight, int height, char *sound,
     return 1;
 }
 
-void deinitAnimal(Animal **animal)
+void animalDeinit(Animal **animal)
 {
         free((*animal)->name);
         free((*animal)->sound);
@@ -59,7 +60,7 @@ void deinitAnimal(Animal **animal)
         *animal = NULL;
 }
 
-void displayAnimalInfo(Animal *animal)
+void displayInfo(Animal *animal)
 {
     printf("%s name: %s\n", animal->species, animal->name);
     printf("%s height: %u cm\n", animal->species, animal->height);
@@ -70,7 +71,7 @@ void displayAnimalInfo(Animal *animal)
     printf("%s HP: %d\n", animal->species, animal->hp);
 }
 
-int animalJump(Animal *animal)
+int jump(Animal *animal)
 {
     int height = randNum(0, animal->speed * 3);
     printf("%s jumps %u cm high!\n\n", animal->name, height);
@@ -78,7 +79,7 @@ int animalJump(Animal *animal)
     return height;
 }
 
-int dashAnimal(Animal *animal)
+int dash(Animal *animal)
 {
     int distance = randNum(0, animal->speed);
     printf("%s dashed %u m!\n", animal->name, distance);
@@ -87,7 +88,7 @@ int dashAnimal(Animal *animal)
     return distance;
 }
 
-int animalBiteAnimal(Animal *attacker, Animal *victim)
+int bite(Animal *attacker, Animal *victim)
 {
     int damage = randNum(0, attacker->strength);
     victim->hp = (victim->hp > damage) ? (victim->hp - damage) : 0;
@@ -117,14 +118,4 @@ int allocStr(char **dest, size_t len)
         return 0;
     }
     return 1;
-}
-
-void copyString(char *dest, const char *src)
-{
-    int i = 0;
-    for (; src[i] != '\0'; i++)
-    {
-        dest[i] = src[i];
-    }
-    dest[i] = '\0';
 }

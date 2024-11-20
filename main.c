@@ -21,37 +21,38 @@ int main()
     Cat *halvan = &_halvan;
     halvan->base = &halvan->_base;
     initCat(halvan, "Halvan");
-    displayCatInfo(halvan); */
+    catDisplayInfo(halvan); */
     
     /* Cat _sid;
     Cat *sid = &_sid;
     sid->base = &sid->_base;
     initCat(sid, "Sid");
-    displayCatInfo(sid);
+    catDisplayInfo(sid);
 
     animalJump(sid->base); */
 
     /* Cat *alfons = initCat("Alfons");
-    displayCatInfo(alfons); */
+    catDisplayInfo(alfons); */
 
     Cat *kalle;
-    initCat(&kalle, "Kalle");
-    displayCatInfo(kalle);
+    catInit(&kalle, "Kalle");
+    catDisplayInfo(kalle);
 
     Cat *oscar;
-    initCat(&oscar, "Oscar");
-    displayCatInfo(oscar);
+    catInit(&oscar, "Oscar");
+    catDisplayInfo(oscar);
 
-    animalBiteAnimal(oscar->base, kalle->base);
+    bite(oscar->base, kalle->base);
 
-    displayCatInfo(kalle);
+    catDisplayInfo(kalle);    
+    catDisplayInfo(oscar);
 
     catSlashAnimal(oscar, kalle->base);
 
-    displayCatInfo(kalle);
+    catDisplayInfo(kalle);
 
-    deinitCat(&oscar);
-    deinitCat(&kalle);
+    catDeinit(&oscar);
+    catDeinit(&kalle);
     /* deinitCat(&alfons);
 
     printf("%u", alfons); */

@@ -22,15 +22,14 @@ typedef struct
 
 } Animal;
 
-int initAnimal(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp);
-void deinitAnimal(Animal **animal);
-void displayAnimalInfo(Animal *animal);
-int animalJump(Animal *animal);
-int dashAnimal(Animal *animal);
-int animalBiteAnimal(Animal *attacker, Animal *victim);
+int animalInit(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp);
+void animalDeinit(Animal **animal);
+void displayInfo(Animal *animal);
+int jump(Animal *animal);
+int dash(Animal *animal);
+int bite(Animal *attacker, Animal *victim);
 int randNum(int min, int max);
 int allocStr(char **dest, size_t len);
-void copyString(char *dest, const char *src);
 
 
 #endif
