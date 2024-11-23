@@ -1,4 +1,4 @@
-#include "Dog.h"
+#include "../includes/Dog.h"
 
 int dogInit(Dog **dog, char *name)
 {

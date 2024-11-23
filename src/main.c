@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "Cat.h"
-#include "Dog.h"
+#include "../includes/Cat.h"
+#include "../includes/Dog.h"
 
 int main()
 {

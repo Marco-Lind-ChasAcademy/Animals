@@ -1,4 +1,4 @@
-#include "Cat.h"
+#include "../includes/Cat.h"
 
 int catInit(Cat **cat, char *name)
 {
