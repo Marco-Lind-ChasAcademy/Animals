@@ -1,7 +1,7 @@
 #include "../includes/Animal.h"
 
 // name[20], sound[10], species[20]
-int animalInit(Animal **animal, char *name, int weight, int height, char *sound, int speed, char *species, int strength, int hp)
+int animalInit(Animal **animal, char *name, unsigned int weight, unsigned int height, char *sound, unsigned int speed, char *species, unsigned int strength, unsigned int hp, unsigned int skill_points, unsigned int level)
 {
     size_t len1 = strlen(name);
     size_t len2 = strlen(sound);
@@ -47,6 +47,8 @@ int animalInit(Animal **animal, char *name, int weight, int height, char *sound,
     (*animal)->speed = speed;
     (*animal)->strength = strength;
     (*animal)->hp = hp;
+    (*animal)->skill_points = skill_points;
+    (*animal)->level = level;
 
     return 1;
 }
@@ -69,6 +71,8 @@ void displayInfo(Animal *animal)
     printf("%s speed: %u km/h\n", animal->species, animal->speed);
     printf("%s strength: %u\n", animal->species, animal->strength);
     printf("%s HP: %d\n", animal->species, animal->hp);
+    printf("%s Skill points: %d\n", animal->species, animal->skill_points);
+    printf("%s Level: %d\n", animal->species, animal->level);
 }
 
 int jump(Animal *animal)
@@ -104,7 +108,7 @@ int bite(Animal *attacker, Animal *victim)
     return damage;
 }
 
-int randNum(int min, int max)
+int randNum(unsigned int min, unsigned int max)
 {
     return (rand() % (max - min + 1)) + min;
 }
@@ -118,4 +122,19 @@ int allocStr(char **dest, size_t len)
         return 0;
     }
     return 1;
+}
+
+void levelUp(Animal *animal)
+{
+    animal->hp += 10;
+    animal->speed += 1;
+    animal->strength += 1;
+}
+
+void levelUpMul(Animal *animal, unsigned int levels)
+{
+    for (int i = 0; i < levels; i++)
+    {
+        levelUp(animal);
+    }    
 }

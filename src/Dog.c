@@ -16,9 +16,11 @@ int dogInit(Dog **dog, char *name)
     unsigned int speed = randNum(25, 50);
     unsigned int strength = randNum(1, 10);
     unsigned int hp = randNum(5, 100);
+    unsigned int skillPoints = 0;
+    unsigned int level = 1;
     unsigned int tooth_length = randNum(3, 10);
 
-    if (!animalInit(&(*dog)->base, name, weight, height, sound, speed, species, strength, hp))
+    if (!animalInit(&(*dog)->base, name, weight, height, sound, speed, species, strength, hp, skillPoints, level))
     {
         free(*dog);
         *dog = NULL;

@@ -16,9 +16,11 @@ int catInit(Cat **cat, char *name)
     unsigned int speed = randNum(25, 50);
     unsigned int strength = randNum(1, 10);
     unsigned int hp = randNum(5, 100);
+    unsigned int skillPoints = 0;
+    unsigned int level = 1;
     unsigned int claw_length = randNum(3, 10);
 
-    if (!animalInit(&(*cat)->base, name, weight, height, sound, speed, species, strength, hp))
+    if (!animalInit(&(*cat)->base, name, weight, height, sound, speed, species, strength, hp, skillPoints, level))
     {
         free(*cat);
         *cat = NULL;
@@ -47,7 +49,7 @@ void catDisplayInfo(Cat *cat)
 unsigned int catSlashAnimal(Cat *attacker, Animal *victim)
 {
     unsigned int damage = 0;
-    unsigned int max = attacker->base->strength * attacker->claw_length * 10;
+    unsigned int max = attacker->base->strength * attacker->claw_length * attacker->base->speed / 10;
     damage = randNum(attacker->base->strength, max);
     victim->hp -= damage;
 

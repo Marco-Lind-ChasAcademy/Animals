@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../includes/Cat.h"
 #include "../includes/Dog.h"
+#include "../includes/game.h"
 
 int main()
 {
@@ -36,20 +37,26 @@ int main()
 
     Cat *kalle;
     catInit(&kalle, "Kalle");
-    catDisplayInfo(kalle);
+    // catDisplayInfo(kalle);
 
     Cat *oscar;
     catInit(&oscar, "Oscar");
-    catDisplayInfo(oscar);
+    // catDisplayInfo(oscar);
 
-    bite(oscar->base, kalle->base);
+    /* bite(oscar->base, kalle->base);
 
     catDisplayInfo(kalle);    
     catDisplayInfo(oscar);
 
     catSlashAnimal(oscar, kalle->base);
 
-    catDisplayInfo(kalle);
+    catDisplayInfo(kalle); */
+
+    /* levelUp(oscar->base);
+    catDisplayInfo(oscar);
+    levelUpMul(oscar->base, 5);
+    catDisplayInfo(oscar); */
+    startFight(oscar->base, kalle->base, 90);
 
     catDeinit(&oscar);
     catDeinit(&kalle);
@@ -57,7 +64,7 @@ int main()
 
     printf("%u", alfons); */
 
-    getchar();
+    //getchar();
     
 
     return 0;
